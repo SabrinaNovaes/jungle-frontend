@@ -42,7 +42,7 @@ function Footer() {
     const carteiras = ["METAMASK", "WALLETCONNECT", "COINBASE"];
 
     const [email, setEmail] = useState("");
-    
+
     const enviarEmail = (email: string) => {
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             toast.error('Digite um e-mail válido!');
@@ -103,15 +103,22 @@ function Footer() {
                                 </h2>
                                 <div className="w-full h-[40px] my-4">
                                     <div className="flex w-full h-full rounded-[6px] justify-between bg-[var(--color-card)] overflow-hidden">
-                                        <input type="email" value={email} onChange={(e) => {
-                                            setEmail(e.target.value)
-                                        }} placeholder="digite seu e-mail..."
+                                        <input
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => {
+                                                setEmail(e.target.value)
+                                            }}
+                                            placeholder="digite seu e-mail..."
                                             className="w-[169px] h-[16px] my-auto ml-[12px] text-[14px] leading-[16px]
                                                 text-[var(--color-text-secundary)] bg-transparent outline-none"/>
 
-                                        <button type="button" onClick={() => enviarEmail(email)} className="w-[85px] h-[40px] py-[12px] pl-[16px] pr-[4px] gap-[10px] 
+                                        <button 
+                                            type="button" 
+                                            onClick={() => enviarEmail(email)} 
+                                            className="w-[85px] h-[40px] py-[12px] pl-[16px] pr-[4px] gap-[10px] 
                                             bg-[var(--color-primary)] font-bold text-[18px] leading-[16px] text-[var(--color-background)]">
-                                            Enviar
+                                                Enviar
                                         </button>
                                     </div>
                                 </div>
