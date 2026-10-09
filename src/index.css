@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+:root {
+    --color-primary: #D28A4C; 
+    --color-background: #140D0A;
+    --color-background-elevated: #FBFBFB;
+    --color-text-foreground: #F5F1EB;
+    --color-text-accent: #E89B55;
+    --color-text-secundary:#CFB28C;
+    --color-card-dark: #241612; 
+    --color-card: #38220F; 
+    --color-border: #3F2319;
+    --color-border-soft: #55321F;
+}
+
+body {
+    background-color: var(--color-background);
+    font-family: 'Roboto Mono', monospace;
+    color: var(--color-text-foreground);
+}
+
+#hero img{
+    padding: 280px, 290px, 50px, 40px;
+}
+
+.range-input {
+  pointer-events: none;
+  appearance: none;
+  border-color: var(--color-background);
+}
+
+.range-input::-webkit-slider-runnable-track {
+  height: 2px;
+  background: transparent;
+}
+
+.range-input::-webkit-slider-thumb {
+  pointer-events: auto;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -8px;
+  border: 3px solid var(--color-background);
+  border-radius: 50%;
+  background: var(--color-text-accent);
+  cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+}
