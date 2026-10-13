@@ -35,7 +35,7 @@ function ModalLogin() {
                     border: 'none',
                     background: 'transparent',
                     width: 'auto',
-                }} >
+                }}>
 
                 <div className={`relative overflow-hidden flex w-[500px] flex-col rounded-[6px] bg-[var(--color-card-dark)] ${modo === "login" ? "h-[600px]" : "h-[656px]"}`}>
 

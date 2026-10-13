@@ -16,6 +16,7 @@
     --color-card: #38220F; 
     --color-border: #3F2319;
     --color-border-soft: #55321F;
+    --color-surface-raised: #2F1D15;
 }
 
 body {
@@ -53,4 +54,12 @@ body {
 
 button {
     cursor: pointer;
+}
+
+.scrollbar-hide {
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
 }

@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MercadoRouteImport } from './routes/mercado'
+import { Route as MercadoIndexRouteImport } from './routes/mercado.index'
+import { Route as MercadoIdRouteImport } from './routes/mercado/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +25,55 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MercadoRoute = MercadoRouteImport.update({
+  id: '/mercado',
+  path: '/mercado',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MercadoIndexRoute = MercadoIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MercadoRoute,
+} as any)
+const MercadoIdRoute = MercadoIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => MercadoRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/mercado': typeof MercadoRouteWithChildren
+  '/mercado/$id': typeof MercadoIdRoute
+  '/mercado/': typeof MercadoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/mercado/$id': typeof MercadoIdRoute
+  '/mercado': typeof MercadoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/mercado': typeof MercadoRouteWithChildren
+  '/mercado/$id': typeof MercadoIdRoute
+  '/mercado/': typeof MercadoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths: '/' | '/login' | '/mercado' | '/mercado/$id' | '/mercado/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login'
-  id: '__root__' | '/' | '/login'
+  to: '/' | '/login' | '/mercado/$id' | '/mercado'
+  id: '__root__' | '/' | '/login' | '/mercado' | '/mercado/$id' | '/mercado/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
+  MercadoRoute: typeof MercadoRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +92,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mercado': {
+      id: '/mercado'
+      path: '/mercado'
+      fullPath: '/mercado'
+      preLoaderRoute: typeof MercadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mercado/': {
+      id: '/mercado/'
+      path: '/'
+      fullPath: '/mercado/'
+      preLoaderRoute: typeof MercadoIndexRouteImport
+      parentRoute: typeof MercadoRoute
+    }
+    '/mercado/$id': {
+      id: '/mercado/$id'
+      path: '/$id'
+      fullPath: '/mercado/$id'
+      preLoaderRoute: typeof MercadoIdRouteImport
+      parentRoute: typeof MercadoRoute
+    }
   }
 }
+
+interface MercadoRouteChildren {
+  MercadoIdRoute: typeof MercadoIdRoute
+  MercadoIndexRoute: typeof MercadoIndexRoute
+}
+
+const MercadoRouteChildren: MercadoRouteChildren = {
+  MercadoIdRoute: MercadoIdRoute,
+  MercadoIndexRoute: MercadoIndexRoute,
+}
+
+const MercadoRouteWithChildren =
+  MercadoRoute._addFileChildren(MercadoRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
+  MercadoRoute: MercadoRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

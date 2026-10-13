@@ -26,7 +26,7 @@ function Produtos() {
 
     return (
         <>
-            <div className="w-[1200px] h-[1373px] gap-[48px] flex mt-40 mx-auto">
+            <div className="w-[1200px] h-[1373px] gap-[48px] flex mx-auto mt-20">
                 <Sidebar />
 
                 <div className="w-[842px] h-[1373px] gap-[88px]">

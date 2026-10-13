@@ -216,7 +216,7 @@ function Footer() {
                             </div>
                         </div>
                     </div>
-                    <div className="w-full h-[272px] gap-[6px]">
+                    <div className="w-full gap-[6px]">
                         <span className="flex w-full h-[30px] text-[14px] leading-[30px] text-[var(--color-text-foreground)]
                             justify-center mx-auto">
                             © 2026 Kurio. Propriedade digital para todos.

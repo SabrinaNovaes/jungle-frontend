@@ -3,8 +3,8 @@ import imgHero from '../../assets/Frame136.png';
 function Hero() {
     return (
         <>
-            <section className="mx-auto h-[450px] w-full max-w-[1200px] py-[40px] ">
-                <article className="grid grid-cols-[1fr_450px] h-full">
+            <div className="mx-auto h-[450px] w-full max-w-[1200px] py-[40px] mb-35">
+                <div className="grid grid-cols-[1fr_450px] h-full">
                     
                     {/* TEXTO */}
                    <div className="flex flex-col justify-center text-left">
@@ -33,8 +33,8 @@ function Hero() {
                     <figure className="w-[450px] h-[450px] ">
                         <img id="hero" className="rounded-[24px] gap-[10px]" src={ imgHero } alt="Imagem do componente Hero" />
                     </figure>
-                </article>
-            </section>
+                </div>
+            </div>
         </>
     );
 }
