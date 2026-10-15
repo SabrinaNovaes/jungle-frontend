@@ -1,15 +1,18 @@
 
 import { useEffect, useState } from "react";
 import { FaLinkedinIn, FaSearch, FaStar } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa6";
+import { IoMdHeartEmpty, IoMdMail } from "react-icons/io";
+import { Link } from "@tanstack/react-router";
+
+import Descricao from "@/components/descricaoNFT/DescricaoNFT";
+import Carousel from "@/components/carouselColecao/CarouselColecao";
+import { useCarrinho } from '@/context/CarrinhoContext';
+
 import img1 from '../../assets/Frame136.png';
 import img2 from '../../assets/NFTArtwork04.png';
 import img3 from '../../assets/NFTArtwork05.png';
 import img4 from '../../assets/NFTArtwork09.png';
-import { FaTwitter } from "react-icons/fa6";
-import { IoMdHeartEmpty, IoMdMail } from "react-icons/io";
-import { Link } from "@tanstack/react-router";
-import Descricao from "@/components/descricaoNFT/DescricaoNFT";
-import Carousel from "@/components/carouselColecao/CarouselColecao";
 
 type Produto = {
     id: number;
@@ -25,6 +28,9 @@ type MercadoProps = {
 };
 
 function Mercado({ produto }: MercadoProps) {
+
+    const [quantidade, setQuantidade] = useState(1);
+    const { adicionarAoCarrinho } = useCarrinho();
 
     const imagensDisponiveis: Record<string, string> = {
         imagem1: img1,
@@ -50,10 +56,10 @@ function Mercado({ produto }: MercadoProps) {
 
     return (
         <>
-            <section className="w-[1440px] h-[2246px] py-[24px] px-[120px] gap-[96px] mx-auto">
+            <section className="w-[1440px] min-h-[1400px] py-[24px] gap-[96px] mx-auto justify-center flex">
                 {/* TOPO */}
                 <div className="w-[1200px] h-[553px] gap-[32px]">
-                    <main className="w-full h-[476px] gap-[12px]">
+                    <main className="w-full gap-[12px]">
                         <span className="w-[145px] h-[16px] font-bold text-[15px] leading-[16px] text-[var(--color-text-foreground)]">
                             Início / Mercado
                         </span>
@@ -192,18 +198,26 @@ function Mercado({ produto }: MercadoProps) {
                                                 <div className="w-[33px] h-full rounded-[33px] border bg-[var(--color-primary)] rounded-full 
                                                     shadow-[0px_6.6px_19.8px_-3.3px_#140D0A26]">
                                                     <div className="w-[26.4px] h-[26.4px] items-center flex justify-center">
-                                                        <button className="text-black text-[35px] text-center flex pt-3 pl-1">-</button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => setQuantidade((atual) => Math.max(1, atual - 1))}
+                                                            className="text-black text-[35px] text-center flex pt-3 pl-1">-</button>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <span></span>
+                                            <span className="flex items-center justify-center min-w-[20px] text-[var(--color-text-foreground)]">
+                                                {quantidade}
+                                            </span>
 
                                             <div className="w-full h-full gap-[12px]">
                                                 <div className="w-[33px] h-full rounded-[33px] border bg-[var(--color-primary)] rounded-full 
                                                     shadow-[0px_6.6px_19.8px_-3.3px_#140D0A26]">
                                                     <div className="w-[26.4px] h-[26.4px] items-center flex justify-center">
-                                                        <button className="text-black text-[30px] text-center flex pt-4 pl-1">+</button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => setQuantidade((atual) => atual + 1)}
+                                                            className="text-black text-[30px] text-center flex pt-4 pl-1">+</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,7 +226,7 @@ function Mercado({ produto }: MercadoProps) {
                                         <div className="w-[268px] h-[40px] gap-[8px] flex">
                                             <button
                                                 type="button"
-
+                                                onClick={() => adicionarAoCarrinho(produto, quantidade)}
                                                 className="w-[130px] h-[40px] rounded-[6px] font-bold justify-between bg-[var(--color-primary)] text-[var(--color-background)]">
                                                 COMPRAR
                                             </button>

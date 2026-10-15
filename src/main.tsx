@@ -6,6 +6,7 @@ import { routeTree } from './routeTree.gen.ts';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import './index.css';
+import { CarrinhoProvider } from './context/CarrinhoContext.tsx';
 
 const router = createRouter({
   routeTree,
@@ -26,7 +27,9 @@ if (import.meta.env.DEV) {
 createRoot(rootElement).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <CarrinhoProvider>
+        <RouterProvider router={router} />
+      </CarrinhoProvider>
     </QueryClientProvider>
   </StrictMode >
 );

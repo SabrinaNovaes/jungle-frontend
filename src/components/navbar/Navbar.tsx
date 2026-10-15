@@ -4,8 +4,11 @@ import logo from "../../assets/Logo.png";
 import { Link } from "@tanstack/react-router";
 import 'reactjs-popup/dist/index.css';
 import ModalLogin from "@/pages/login/ModalLoginCadastro";
+import { useCarrinho } from "@/context/CarrinhoContext";
 
 function Navbar() {
+
+    const { totalItens } = useCarrinho();
 
     return (
         <>
@@ -16,7 +19,7 @@ function Navbar() {
                     {/* LOGO */}
                     <div className="flex items-center">
                         <Link to="/">
-                            <img src={ logo } alt="Logo Kurio" className="h-[34.3px] w-[160px]" />
+                            <img src={logo} alt="Logo Kurio" className="h-[34.3px] w-[160px]" />
                         </Link>
                     </div>
 
@@ -33,7 +36,20 @@ function Navbar() {
                     {/* SEARCH/CARRINHO/ENTRAR */}
                     <div className="flex h-[35px] w-[207px] items-center gap-[28px]">
                         <Link to="/"><FaSearch /></Link>
-                        <Link to="/carrinho"><FaCartShopping /></Link>
+
+                        <div className="relative">
+                            <Link
+                                to="/carrinho"
+                                aria-label={`Carrinho com ${totalItens} itens`}
+                                className="relative flex items-center justify-center">
+                                <FaCartShopping />
+                                {totalItens > 0 && (
+                                    <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-primary)] px-1 text-[10px] font-bold text-[var(--color-background)]">
+                                        {totalItens}
+                                    </span>
+                                )}
+                            </Link>
+                        </div>
                         <ModalLogin />
                     </div>
                 </div>

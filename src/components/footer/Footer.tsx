@@ -53,7 +53,7 @@ function Footer() {
 
     return (
         <>
-            <div className="w-[1200px] h-[610px] mx-auto">
+            <div className="w-[1200px] h-[610px] mx-auto pt-10">
 
                 {/* TOPO FOOTER */}
                 <div className="flex w-full h-[250px] p-[32px] gap-[12px] bg-[var(--color-card-dark)]">

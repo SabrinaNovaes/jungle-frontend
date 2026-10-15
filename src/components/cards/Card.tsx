@@ -62,6 +62,8 @@ function Cards({ modo = 'grade' }: CardsProps) {
 
             return resposta.data;
         },
+        staleTime: 5 * 60 * 1000,
+        retry: 1,
     });
 
     if (isLoading) return <p>Carregando produtos...</p>;
@@ -159,7 +161,7 @@ function Cards({ modo = 'grade' }: CardsProps) {
 
                 {/* BOLINHAS DO CARROSSEL */}
                 {modo === 'carrossel' && (
-                    <div className="flex justify-center gap-2 mt-4">
+                    <div className="flex justify-center gap-2">
                         {[0, 1, 2].map((indice) => (
                             <button
                                 key={indice}
@@ -167,9 +169,9 @@ function Cards({ modo = 'grade' }: CardsProps) {
                                 onClick={() => mudarSlide(indice)}
                                 aria-label={`Ir para o slide ${indice + 1}`}
                                 className={`h-2.5 w-2.5 rounded-full transition-colors ${slideAtual === indice
-                                        ? 'bg-[var(--color-primary)]'
-                                        : 'bg-[var(--color-border)]'
-                                    }`}/>
+                                    ? 'bg-[var(--color-primary)]'
+                                    : 'bg-[var(--color-border)]'
+                                    }`} />
                         ))}
                     </div>
                 )}

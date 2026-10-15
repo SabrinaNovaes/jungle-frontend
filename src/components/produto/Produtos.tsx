@@ -2,6 +2,7 @@ import { useState } from "react";
 import Sidebar from "../sidebarFiltro.tsx/Sidebar";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Cards from "../cards/Card";
+import { useRouterState } from "@tanstack/react-router";
 
 function Produtos() {
 
@@ -24,9 +25,19 @@ function Produtos() {
         setOrdenacaoAberta(false);
     };
 
+    const pathname = useRouterState({
+        select: (state) => state.location.pathname,
+    });
+
+    const estaNaTelaDeDetalhes = /^\/mercado\/[^/]+\/?$/.test(pathname);
+
+    if (estaNaTelaDeDetalhes) {
+        return null;
+    }
+
     return (
         <>
-            <div className="w-[1200px] h-[1373px] gap-[48px] flex mx-auto mt-20">
+            <div className="w-[1200px] h-[1373px] gap-[48px] flex mx-auto">
                 <Sidebar />
 
                 <div className="w-[842px] h-[1373px] gap-[88px]">
