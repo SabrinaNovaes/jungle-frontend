@@ -6,6 +6,7 @@ import imagem1 from '@/assets/Frame136.png';
 import imagem2 from '@/assets/NFTArtwork04.png';
 import imagem3 from '@/assets/NFTArtwork05.png';
 import imagem4 from '@/assets/NFTArtwork09.png';
+import ModalPedido from "../modalPedido/ModalPedido";
 
 const imagens: Record<string, string> = {
     imagem1,
@@ -54,33 +55,6 @@ function FormPagamento() {
             toast.error('Cupom inválido.');
         }
     }
-
-    function confirmarCompra() {
-            if (itens.length === 0) {
-                toast.error('Seu carrinho está vazio.');
-                return;
-            }
-    
-            if (!carteira) {
-                toast.error('Selecione uma carteira.');
-                return;
-            }
-    
-            toast.info(
-                `Pedido preparado com ${carteiras.find((c) => c.id === carteira)?.nome}. Para pagar, é necessário integrar a carteira.`
-            );
-        }
-    
-        if (itens.length === 0) {
-            return (
-                <section className="mx-auto w-full max-w-[1200px] p-8 text-[var(--color-text-foreground)]">
-                    <h1 className="text-xl font-bold">Confirmar compra</h1>
-                    <p className="mt-4 text-sm text-[var(--color-text-secundary)]">
-                        Seu carrinho está vazio. Adicione produtos antes de continuar.
-                    </p>
-                </section>
-            );
-        }
 
     return (
         <>
@@ -253,12 +227,7 @@ function FormPagamento() {
                                         </label>
                                     ))}
                                 </div>
-                                <button
-                                    type="button"
-                                    onClick={confirmarCompra}
-                                    className="w-full mt-2 rounded-[3px] bg-[var(--color-primary)] px-4 py-3 font-bold text-[var(--color-background)]">
-                                    Confirmar compra
-                                </button>
+                                <ModalPedido carteira={carteira} total={total} />
                             </div>
                         </div>
                     </div>

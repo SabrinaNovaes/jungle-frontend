@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaTrashCan } from 'react-icons/fa6';
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { useCarrinho } from '@/context/CarrinhoContext';
 
 import imagem1 from '../../assets/Frame136.png';
@@ -17,6 +17,9 @@ const imagensDisponiveis: Record<string, string> = {
 };
 
 function Carrinho() {
+
+    const navigate = useNavigate();
+
     const {
         itens,
         atualizarQuantidade,
@@ -265,9 +268,7 @@ function Carrinho() {
                                     <button
                                         type='button'
                                         disabled={itens.length === 0}
-                                        onClick={() => {
-
-                                        }}
+                                        onClick={() => navigate({ to: "/pagamento" })}
                                         className='h-[40px] rounded-[3px] bg-[var(--color-primary)] text-[var(--color-background)]'>
                                         Conectar e finalizar
                                     </button>
