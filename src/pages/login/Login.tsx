@@ -76,7 +76,7 @@ function Login() {
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="contato@email.com"
                             required
-                            className="w-full h-full py-[12px] px-[16px] text-[14px] text-[var(--color-text-secundary)] rounded-[5px] bg-transparent outline-none" />
+                            className="w-full h-full py-[12px] px-[16px] text-[14px] text-[var(--color-text-secundary)] rounded-[5px] bg-transparent" />
                     </div>
 
                     <div className="relative h-[40px] rounded-[5px] border border-[var(--color-primary)]">
@@ -87,7 +87,7 @@ function Login() {
                             onChange={(e) => setSenha(e.target.value)}
                             placeholder="Senha"
                             required
-                            className="h-[40px] flex w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)] outline-none" />
+                            className="h-[40px] flex w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)]"/>
 
                         <button
                             type="button"

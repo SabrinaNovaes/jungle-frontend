@@ -63,3 +63,8 @@ button {
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
+
+input {
+    outline: none;
+    color: var(--color-text-secundary);
+}

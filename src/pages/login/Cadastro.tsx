@@ -84,7 +84,7 @@ function Cadastro() {
                         onChange={(e) => setNome(e.target.value)}
                         placeholder="Nome de usuário"
                         required
-                        className="h-[40px] w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)] outline-none" />
+                        className="h-[40px] w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)]" />
 
                     <input
                         type="email"
@@ -93,7 +93,7 @@ function Cadastro() {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Digite seu e-mail"
                         required
-                        className="h-[40px] w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)] outline-none" />
+                        className="h-[40px] w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)]" />
 
                     <div className="relative h-[40px] w-full">
                         <input
@@ -103,7 +103,7 @@ function Cadastro() {
                             onChange={(e) => setSenha(e.target.value)}
                             placeholder="Senha"
                             required
-                            className="h-[40px] flex w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)] outline-none" />
+                            className="h-[40px] flex w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)]" />
 
                         <button
                             type="button"
@@ -121,7 +121,7 @@ function Cadastro() {
                         onChange={(e) => setConfirmarSenha(e.target.value)}
                         placeholder="Confirmar senha"
                         required
-                        className="h-[40px] w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)] outline-none" />
+                        className="h-[40px] w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)]" />
 
                     <button
                         type="submit"
