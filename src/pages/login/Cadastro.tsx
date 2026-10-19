@@ -39,14 +39,31 @@ function Cadastro() {
 
         const novoUsuario = {
             nome: nome.trim(),
-            email: email.trim(),
+            email: email.trim().toLowerCase(),
             senha,
         };
 
-        console.log("Novo usuário:", {
-            ...novoUsuario,
-            senha: "[oculta]",
-        });
+        const usuarios = JSON.parse(
+            localStorage.getItem("usuariosCadastrados") || "[]"
+        );
+
+        const emailExistente = usuarios.some(
+            (usuario: { email: string }) =>
+                usuario.email === novoUsuario.email
+        );
+
+        if (emailExistente) {
+            toast.error("Já existe uma conta com esse e-mail.");
+            return;
+        }
+
+        usuarios.push(novoUsuario);
+
+        localStorage.setItem(
+            "usuariosCadastrados",
+            JSON.stringify(usuarios)
+        );
+
         toast.success("Cadastro realizado com sucesso!");
 
         setNome("");

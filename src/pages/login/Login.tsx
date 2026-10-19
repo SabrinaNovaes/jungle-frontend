@@ -24,7 +24,35 @@ function Login() {
             toast.error("A senha deve ter pelo menos 6 caracteres!");
             return;
         }
+        
+        
+        const usuarios = JSON.parse(
+            localStorage.getItem("usuariosCadastrados") || "[]"
+        );
+
+        const usuarioEncontrado = usuarios.find(
+            (usuario: { email: string; senha: string }) =>
+                usuario.email === email.trim().toLowerCase() &&
+                usuario.senha === senha
+        );
+
+        if (!usuarioEncontrado) {
+            toast.error("E-mail ou senha incorretos.");
+            return;
+        }
+
+        localStorage.setItem(
+            "usuarioLogado",
+            JSON.stringify({
+                nome: usuarioEncontrado.nome,
+                email: usuarioEncontrado.email,
+            })
+        );
+
+        window.dispatchEvent(new Event("authChange"));
+        
         toast.success("Login realizado com sucesso!");
+
     }
 
     function recuperarSenha() {

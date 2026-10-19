@@ -25,7 +25,7 @@ function FormPagamento() {
 
     const { itens } = useCarrinho();
 
-    const [carteira, setCarteira] = useState('coinbase');
+    const [carteira, setCarteira] = useState('metamask');
     const [codigo, setCodigo] = useState('');
     const [cupomAplicado, setCupomAplicado] = useState(false);
     const [mostrarCupom, setMostrarCupom] = useState(false);

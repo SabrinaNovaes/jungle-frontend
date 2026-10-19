@@ -5,10 +5,31 @@ import { Link } from "@tanstack/react-router";
 import 'reactjs-popup/dist/index.css';
 import ModalLogin from "@/pages/login/ModalLoginCadastro";
 import { useCarrinho } from "@/context/CarrinhoContext";
+import { useEffect, useState } from "react";
+import Logout from "@/components/logout/Logout";
+
 
 function Navbar() {
 
     const { totalItens } = useCarrinho();
+
+    const [usuarioLogado, setUsuarioLogado] = useState(false);
+    
+    useEffect(() => {
+        function verificarLogin() {
+            setUsuarioLogado(
+                !!localStorage.getItem("usuarioLogado")
+            );
+        }
+
+        verificarLogin();
+
+        window.addEventListener("authChange", verificarLogin);
+
+        return () => {
+            window.removeEventListener("authChange", verificarLogin);
+        };
+    }, []);
 
     return (
         <>
@@ -50,7 +71,11 @@ function Navbar() {
                                 )}
                             </Link>
                         </div>
-                        <ModalLogin />
+                        {usuarioLogado ? (
+                            <Logout />
+                        ) : (
+                            <ModalLogin />
+                        )}
                     </div>
                 </div>
             </nav>

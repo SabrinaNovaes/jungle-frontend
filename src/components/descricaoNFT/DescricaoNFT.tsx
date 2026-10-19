@@ -29,19 +29,19 @@ function Descricao({ produtos }: DescricaoProps) {
                                         <div className="w-full h-[28px]">
                                             <div className="w-[530px] h-full gap-[32px] text-[17px] leading-[16px]">
                                                 <button
-                                                    key={produtos.id}
                                                     type="button"
                                                     onClick={() => setModo("detalhes")}
-                                                    className={`${modo === "detalhes" ? "text-[var(--color-text-accent)] font-bold border-b-[3px] border-[var(--color-primary)]"
+                                                    className={`${modo === "detalhes"
+                                                        ? "text-[var(--color-text-accent)] font-bold border-b-[3px] border-[var(--color-primary)]"
                                                         : "text-[var(--color-text-foreground)]"} mr-6 py-3`}>
-                                                    Deatlhes do NFT
+                                                    Detalhes do NFT
                                                 </button>
 
                                                 <button
-                                                    key={produtos.id}
                                                     type="button"
                                                     onClick={() => setModo("avaliacao")}
-                                                    className={`${modo === "avaliacao" ? "text-[var(--color-text-accent)] font-bold border-b-[3px] border-[var(--color-primary)]"
+                                                    className={`${modo === "avaliacao"
+                                                        ? "text-[var(--color-text-accent)] font-bold border-b-[3px] border-[var(--color-primary)]"
                                                         : "text-[var(--color-text-foreground)]"} py-3`}>
                                                     Avaliações (19)
                                                 </button>
@@ -54,7 +54,7 @@ function Descricao({ produtos }: DescricaoProps) {
                                                     Cada atributo fica armazenado nos metadados do token e
                                                     verificado na Ethereum. A obra explora identidade,
                                                     movimento e luz em um mundo digital sem fronteiras.
-                                                    <br/> <br/>
+                                                    <br /> <br />
                                                     A propriedade inclui a arte em alta resolução,
                                                     lançamentos exclusivos para colecionadores e um registro
                                                     permanente de procedência na rede. Nova Sato recebe 5%
@@ -63,13 +63,13 @@ function Descricao({ produtos }: DescricaoProps) {
                                                 </p>
                                             ) : (
                                                 <p className="w-full min-h-[120px] leading-[24px] py-6 text-[14px] text-[var(--color-text-secundary)]">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                                    Eaque architecto hic alias illo facere expedita et itaque neque voluptatibus 
-                                                    necessitatibus consequuntur quasi quidem distinctio dolorem debitis, 
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                    Eaque architecto hic alias illo facere expedita et itaque neque voluptatibus
+                                                    necessitatibus consequuntur quasi quidem distinctio dolorem debitis,
                                                     praesentium repellat deserunt earum.
-                                                    <br/> <br/>
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                                    Eius iusto dolorem voluptatem repellendus numquam illo repudiandae at quae 
+                                                    <br /> <br />
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                    Eius iusto dolorem voluptatem repellendus numquam illo repudiandae at quae
                                                     quia cumque id ab quam unde quod, debitis necessitatibus ullam, quasi nostrum.
                                                 </p>
                                             )}
@@ -77,7 +77,7 @@ function Descricao({ produtos }: DescricaoProps) {
                                     </div>
                                 </div>
                                 <span className="w-[1200px] h-[24px] font-bold text-[14px] leading-[24px] text-[var(--color-text-foreground)]">
-                                    Rede: 
+                                    Rede:
                                 </span>
                             </div>
                             <p className="w-[1200px] h-[24px] text-[14px] leading-[24px] text-[var(--color-text-secundary)]">
@@ -93,7 +93,7 @@ function Descricao({ produtos }: DescricaoProps) {
                     </p>
                 </div>
                 <span className="w-[1200px] h-[24px] font-bold text-[14px] leading-[24px] text-[var(--color-text-foreground)]">
-                    Direitos autorais: 
+                    Direitos autorais:
                 </span>
                 <p className="w-[1200px] h-[24px] text-[14px] leading-[24px] text-[var(--color-text-secundary)]">
                     0x7A42...19E8 • Contrato inteligente ERC-721 verificado.
