@@ -64,7 +64,7 @@ button {
     display: none;
 }
 
-input {
+input, select {
     outline: none;
     color: var(--color-text-secundary);
 }

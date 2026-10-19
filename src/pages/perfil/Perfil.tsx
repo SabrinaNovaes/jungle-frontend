@@ -122,8 +122,8 @@ function Perfil() {
                                     onChange={(e) => setSenhaAtual(e.target.value)}
                                     required
                                     className="relative w-[417px] h-[40px] rounded-[6px] border border-[var(--color-border)] px-3" />
-                            
-                                    <button
+
+                                <button
                                     type="button"
                                     onClick={() => setMostrarSenha(!mostrarSenha)}
                                     className="absolute right-262 top-130 -translate-y-1/2 flex items-center text-[var(--color-text-foreground)]"

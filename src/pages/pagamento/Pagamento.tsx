@@ -77,8 +77,7 @@ function Pagamento() {
                                                 <input
                                                     type="email"
                                                     required
-                                                    className="px-2 w-full h-[40px] rounded-[3px] border border-[var(--color-border)] text-[var(--color-text-secundary)]"
-                                                />
+                                                    className="px-2 w-full h-[40px] rounded-[3px] border border-[var(--color-border)] text-[var(--color-text-secundary)]"/>
                                             </CampoFormulario>
                                         </div>
                                     </div>

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CarrinhoRouteImport } from './routes/carrinho'
+import { Route as CarteiraRouteImport } from './routes/carteira'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MercadoRouteImport } from './routes/mercado'
 import { Route as PagamentoRouteImport } from './routes/pagamento'
@@ -26,6 +27,11 @@ const IndexRoute = IndexRouteImport.update({
 const CarrinhoRoute = CarrinhoRouteImport.update({
   id: '/carrinho',
   path: '/carrinho',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarteiraRoute = CarteiraRouteImport.update({
+  id: '/carteira',
+  path: '/carteira',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -62,6 +68,7 @@ const MercadoIdRoute = MercadoIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
+  '/carteira': typeof CarteiraRoute
   '/login': typeof LoginRoute
   '/mercado': typeof MercadoRouteWithChildren
   '/pagamento': typeof PagamentoRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
+  '/carteira': typeof CarteiraRoute
   '/login': typeof LoginRoute
   '/pagamento': typeof PagamentoRoute
   '/perfil': typeof PerfilRoute
@@ -82,6 +90,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
+  '/carteira': typeof CarteiraRoute
   '/login': typeof LoginRoute
   '/mercado': typeof MercadoRouteWithChildren
   '/pagamento': typeof PagamentoRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/carrinho'
+    | '/carteira'
     | '/login'
     | '/mercado'
     | '/pagamento'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/carrinho'
+    | '/carteira'
     | '/login'
     | '/pagamento'
     | '/perfil'
@@ -113,6 +124,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/carrinho'
+    | '/carteira'
     | '/login'
     | '/mercado'
     | '/pagamento'
@@ -124,6 +136,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CarrinhoRoute: typeof CarrinhoRoute
+  CarteiraRoute: typeof CarteiraRoute
   LoginRoute: typeof LoginRoute
   MercadoRoute: typeof MercadoRouteWithChildren
   PagamentoRoute: typeof PagamentoRoute
@@ -144,6 +157,13 @@ declare module '@tanstack/react-router' {
       path: '/carrinho'
       fullPath: '/carrinho'
       preLoaderRoute: typeof CarrinhoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carteira': {
+      id: '/carteira'
+      path: '/carteira'
+      fullPath: '/carteira'
+      preLoaderRoute: typeof CarteiraRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -207,6 +227,7 @@ const MercadoRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CarrinhoRoute: CarrinhoRoute,
+  CarteiraRoute: CarteiraRoute,
   LoginRoute: LoginRoute,
   MercadoRoute: MercadoRouteWithChildren,
   PagamentoRoute: PagamentoRoute,
