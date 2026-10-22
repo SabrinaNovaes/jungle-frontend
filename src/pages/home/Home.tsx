@@ -2,18 +2,16 @@ import Blog from "@/components/blog/Blog";
 import Hero from "@/components/hero/Hero";
 import Produtos from "@/components/produto/Produtos";
 import Promo from "@/components/promo/Promo";
+import SearchMobile from "@/components/searchMobile/SearchMobile";
 
-function Home () {
+function Home() {
     return (
         <>
-            <section className="">
-                <div className="">
-                    <Hero />
-                    <Produtos />
-                    <Promo />
-                    <Blog />
-                </div>
-            </section>
+            <SearchMobile />
+            <Hero />
+            <Produtos />
+            <Promo />
+            <Blog />
         </>
     );
 }

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { IoIosLogOut } from "react-icons/io";
 import { toast } from "react-toastify";
+import { encerrarSessao } from "@/service/auth";
 
 type LogoutProps = {
     variant?: "navbar" | "sidebar";
@@ -10,12 +11,10 @@ function Logout({ variant = "navbar" }: LogoutProps) {
     const navigate = useNavigate();
 
     function sair() {
-        localStorage.removeItem("usuarioLogado");
-
-        window.dispatchEvent(new Event("authChange"));
+        encerrarSessao();
 
         toast.success("Logout realizado com sucesso!");
-        
+
         navigate({ to: "/" });
     }
 
@@ -28,10 +27,10 @@ function Logout({ variant = "navbar" }: LogoutProps) {
             }}
             className={
                 variant === "navbar"
-                    ? "flex h-[35px] w-[100px] items-center justify-center gap-2 rounded-[6px] bg-[var(--color-primary)] text-[16px] text-[var(--color-background)]"
-                    : "flex items-center gap-2 text-[15px] text-[var(--color-text-accent)] font-bold leading-[15px] w-full h-[15px]"
+                    ? "btn btn-primary min-h-0 h-9 w-25 gap-2 text-subtitle font-normal"
+                    : "flex w-full items-center gap-2 text-label font-bold text-accent"
             }>
-            <IoIosLogOut size={26}/>
+            <IoIosLogOut size={variant === "navbar" ? 20 : 26} />
             Sair
         </Link>
     );

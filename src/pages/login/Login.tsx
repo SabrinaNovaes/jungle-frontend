@@ -1,16 +1,17 @@
 import { useState, type SyntheticEvent } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import CampoSenha from "@/components/campoForm/CampoSenha";
+import { buscarUsuario, iniciarSessao } from "@/service/auth";
+import { emailValido } from "@/utils/validacao";
 
-function Login() {
+type LoginProps = {
+    onSucesso?: () => void;
+    gradiente?: boolean;
+};
+
+function Login({ onSucesso, gradiente = false }: LoginProps) {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-
-    const [mostrarSenha, setMostrarSenha] = useState(false);
-
-    function emailValido(email: string) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
 
     function login(e: SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -24,35 +25,18 @@ function Login() {
             toast.error("A senha deve ter pelo menos 6 caracteres!");
             return;
         }
-        
-        
-        const usuarios = JSON.parse(
-            localStorage.getItem("usuariosCadastrados") || "[]"
-        );
 
-        const usuarioEncontrado = usuarios.find(
-            (usuario: { email: string; senha: string }) =>
-                usuario.email === email.trim().toLowerCase() &&
-                usuario.senha === senha
-        );
+        const usuarioEncontrado = buscarUsuario(email, senha);
 
         if (!usuarioEncontrado) {
             toast.error("E-mail ou senha incorretos.");
             return;
         }
 
-        localStorage.setItem(
-            "usuarioLogado",
-            JSON.stringify({
-                nome: usuarioEncontrado.nome,
-                email: usuarioEncontrado.email,
-            })
-        );
+        iniciarSessao(usuarioEncontrado);
 
-        window.dispatchEvent(new Event("authChange"));
-        
         toast.success("Login realizado com sucesso!");
-
+        onSucesso?.();
     }
 
     function recuperarSenha() {
@@ -64,59 +48,40 @@ function Login() {
     }
 
     return (
-        <>
-            {/* FORM */}
-            <form onSubmit={login}>
-                <div className="h-[144px] pt-[24px] px-[80px] gap-[12px] flex flex-col">
-                    <div className="h-[40px] rounded-[5px] border border-[var(--color-primary)]">
-                        <input
-                            type="email"
-                            name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="contato@email.com"
-                            required
-                            className="w-full h-full py-[12px] px-[16px] text-[14px] text-[var(--color-text-secundary)] rounded-[5px] bg-transparent" />
-                    </div>
+        <form onSubmit={login} className="flex flex-col gap-3">
+            <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="contato@email.com"
+                autoComplete="email"
+                required
+                aria-label="E-mail"
+                className="field" />
 
-                    <div className="relative h-[40px] rounded-[5px] border border-[var(--color-primary)]">
-                        <input
-                            type={`${mostrarSenha ? "text" : "password"}`}
-                            name="senha"
-                            value={senha}
-                            onChange={(e) => setSenha(e.target.value)}
-                            placeholder="Senha"
-                            required
-                            className="h-[40px] flex w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)]"/>
+            <CampoSenha
+                name="senha"
+                value={senha}
+                onChange={setSenha}
+                placeholder="Senha"
+                autoComplete="current-password"
+                required
+                aria-label="Senha" />
 
-                        <button
-                            type="button"
-                            onClick={() => setMostrarSenha(!mostrarSenha)}
-                            className="absolute right-[12px] top-1/2 -translate-y-1/2 flex items-center text-[var(--color-text-foreground)]"
-                            aria-label={mostrarSenha ? "Ocultar senha" : "Mostrar senha"}>
-                            {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
-                        </button>
-                    </div>
+            <button
+                type="button"
+                onClick={recuperarSenha}
+                className="self-end text-body text-accent hover:underline">
+                Esqueceu a senha?
+            </button>
 
-                    <div className="h-[16px]">
-                        <button
-                            type="button"
-                            onClick={recuperarSenha}
-                            className="text-[14px] flex items-start leading-[16px] text-[var(--color-text-accent)] ml-45">
-                            Esqueceu a senha?
-                        </button>
-                    </div>
-
-                    <div className="w-full z-10 h-[69px] pt-[24px]">
-                        <button
-                            type="submit"
-                            className="w-full rounded-[5px] bg-[var(--color-primary)] py-[12px] font-bold text-[var(--color-background)]">
-                            Entrar
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </>
+            <button
+                type="submit"
+                className={`btn btn-block mt-3 ${gradiente ? "btn-gradient" : "btn-primary"}`}>
+                Entrar
+            </button>
+        </form>
     );
 }
 

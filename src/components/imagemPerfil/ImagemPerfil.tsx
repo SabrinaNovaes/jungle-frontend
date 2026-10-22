@@ -27,14 +27,14 @@ function ImagemPerfil() {
     }
 
     return (
-        <div className="w-[251px] h-[50px] flex items-center gap-[20px] mt-2">
+        <div className="flex flex-wrap items-center gap-5">
             <label className="cursor-pointer">
-                <div className="w-[50px] h-[50px] flex items-center justify-center overflow-hidden rounded-[25px] border border-[var(--color-border)] bg-[var(--color-surface-raised)] text-[var(--color-primary)]">
+                <div className="flex size-12 items-center justify-center overflow-hidden rounded-full border border-line bg-surface text-primary">
                     {imagem ? (
                         <img
                             src={imagem}
                             alt="Imagem do perfil"
-                            className="w-full h-full rounded-full object-cover"/>
+                            className="size-full rounded-full object-cover" />
                     ) : (
                         <CiImageOn size={23} />
                     )}
@@ -44,23 +44,23 @@ function ImagemPerfil() {
                     type="file"
                     accept="image/*"
                     onChange={selecionarImagem}
-                    className="hidden"/>
+                    className="hidden" />
             </label>
 
-            <div className="w-[177px] h-[40px] flex items-center gap-[20px]">
-                <label className="w-[98px] h-[40px] flex items-center justify-center rounded-[3px] bg-[var(--color-primary)] text-[var(--color-background)] text-center font-bold text-[14px] leading-[16px]">
+            <div className="flex items-center gap-5">
+                <label className="btn btn-primary min-w-24 cursor-pointer">
                     Alterar
                     <input
                         type="file"
                         accept="image/*"
                         onChange={selecionarImagem}
-                        className="hidden"/>
+                        className="hidden" />
                 </label>
 
                 <button
                     type="button"
                     onClick={removerImagem}
-                    className="h-[16px] text-[14px] leading-[16px] text-[var(--color-text-foreground)]">
+                    className="text-body text-foreground transition-colors hover:text-accent">
                     Remover
                 </button>
             </div>

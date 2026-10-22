@@ -5,15 +5,9 @@ import {
     useState,
     type ReactNode,
 } from 'react';
+import type { Produto } from '@/types/produto';
 
-export type ProdutoCarrinho = {
-    id: number;
-    nome: string;
-    identificador: string;
-    preco: string;
-    imagem: string;
-    imagens: string[];
-};
+export type ProdutoCarrinho = Produto;
 
 export type ItemCarrinho = {
     produto: ProdutoCarrinho;

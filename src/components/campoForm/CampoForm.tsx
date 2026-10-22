@@ -1,4 +1,3 @@
-
 type CampoFormularioProps = {
   label: string;
   children: React.ReactNode;
@@ -11,10 +10,10 @@ function CampoFormulario({
   className = '',
 }: CampoFormularioProps) {
   return (
-    <div className={`flex flex-col gap-2 ${className}`}>
-      <label className="text-[15px] text-[var(--color-text-foreground)]">
+    <div className={`flex min-w-0 flex-col ${className}`}>
+      <label className="field-label">
         {label}
-        <span className="ml-1 text-[var(--color-text-coral)]">*</span>
+        <span className="req ml-1" aria-hidden="true">*</span>
       </label>
       {children}
     </div>

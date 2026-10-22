@@ -1,18 +1,20 @@
 import { useState, type SyntheticEvent } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import CampoSenha from "@/components/campoForm/CampoSenha";
+import { emailJaCadastrado, salvarUsuario } from "@/service/auth";
+import { emailValido } from "@/utils/validacao";
 
-function Cadastro() {
+type CadastroProps = {
+    onSucesso?: () => void;
+    gradiente?: boolean;
+};
+
+function Cadastro({ onSucesso, gradiente = false }: CadastroProps) {
 
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [confirmarSenha, setConfirmarSenha] = useState("");
-    const [mostrarSenha, setMostrarSenha] = useState(false);
-
-    function emailValido(email: string) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
 
     function cadastrar(e: SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -43,26 +45,12 @@ function Cadastro() {
             senha,
         };
 
-        const usuarios = JSON.parse(
-            localStorage.getItem("usuariosCadastrados") || "[]"
-        );
-
-        const emailExistente = usuarios.some(
-            (usuario: { email: string }) =>
-                usuario.email === novoUsuario.email
-        );
-
-        if (emailExistente) {
+        if (emailJaCadastrado(novoUsuario.email)) {
             toast.error("Já existe uma conta com esse e-mail.");
             return;
         }
 
-        usuarios.push(novoUsuario);
-
-        localStorage.setItem(
-            "usuariosCadastrados",
-            JSON.stringify(usuarios)
-        );
+        salvarUsuario(novoUsuario);
 
         toast.success("Cadastro realizado com sucesso!");
 
@@ -70,67 +58,57 @@ function Cadastro() {
         setEmail("");
         setSenha("");
         setConfirmarSenha("");
+        onSucesso?.();
     }
 
     return (
-        <>
-            {/* FORM */}
-            <form onSubmit={cadastrar}>
-                <div className="flex flex-col gap-[12px] px-[80px] pt-[24px]">
-                    <input
-                        type="text"
-                        name="nome"
-                        value={nome}
-                        onChange={(e) => setNome(e.target.value)}
-                        placeholder="Nome de usuário"
-                        required
-                        className="h-[40px] w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)]" />
+        <form onSubmit={cadastrar} className="flex flex-col gap-3">
+            <input
+                type="text"
+                name="nome"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                placeholder="Nome de usuário"
+                autoComplete="username"
+                required
+                aria-label="Nome de usuário"
+                className="field" />
 
-                    <input
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Digite seu e-mail"
-                        required
-                        className="h-[40px] w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)]" />
+            <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Digite seu e-mail"
+                autoComplete="email"
+                required
+                aria-label="E-mail"
+                className="field" />
 
-                    <div className="relative h-[40px] w-full">
-                        <input
-                            type={`${mostrarSenha ? "text" : "password"}`}
-                            name="senha"
-                            value={senha}
-                            onChange={(e) => setSenha(e.target.value)}
-                            placeholder="Senha"
-                            required
-                            className="h-[40px] flex w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)]" />
+            <CampoSenha
+                name="senha"
+                value={senha}
+                onChange={setSenha}
+                placeholder="Senha"
+                autoComplete="new-password"
+                required
+                aria-label="Senha" />
 
-                        <button
-                            type="button"
-                            onClick={() => setMostrarSenha(!mostrarSenha)}
-                            className="absolute right-[12px] top-1/2 -translate-y-1/2 flex items-center text-[var(--color-text-foreground)]"
-                            aria-label={mostrarSenha ? "Ocultar senha" : "Mostrar senha"}>
-                            {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
-                        </button>
-                    </div>
+            <CampoSenha
+                name="confirmarSenha"
+                value={confirmarSenha}
+                onChange={setConfirmarSenha}
+                placeholder="Confirmar senha"
+                autoComplete="new-password"
+                required
+                aria-label="Confirmar senha" />
 
-                    <input
-                        type="password"
-                        name="confirmarSenha"
-                        value={confirmarSenha}
-                        onChange={(e) => setConfirmarSenha(e.target.value)}
-                        placeholder="Confirmar senha"
-                        required
-                        className="h-[40px] w-full rounded-[5px] border border-[var(--color-primary)] bg-transparent px-[16px] text-[14px] text-[var(--color-text-foreground)]" />
-
-                    <button
-                        type="submit"
-                        className="mt-[12px] flex h-[45px] w-full cursor-pointer items-center justify-center rounded-[5px] bg-[var(--color-primary)] font-bold text-[var(--color-background)]">
-                        Criar conta
-                    </button>
-                </div>
-            </form>
-        </>
+            <button
+                type="submit"
+                className={`btn btn-block mt-3 ${gradiente ? "btn-gradient" : "btn-primary"}`}>
+                Criar conta
+            </button>
+        </form>
     );
 }
 
